@@ -1,27 +1,28 @@
  <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
   </head>
   
   <body>
-    <button id="themeBtn" onclick="GenerateTheme()">Click Me to get a Random Theme!</button>
+    <button id="themeBtn">Click Me to get a Random Theme!</button>
     
     <button id="copyBtn" data-clipboard-target="#result">Copy Code</button> <br/>
     
     <img src="https://res.cloudinary.com/road6943/image/upload/v1539323381/Arras/HowToUseTheme.v2.png"/> <br/>
     
+    <p>Click an object in the preview below to get a new random color for it!</p>
+    
     <svg id="preview">
-      <rect class="barrel" x="50" y="40" rx="5" ry="5" width="35" height="20" stroke-width="3"/>
+      <rect class="barrelsAndRocks" x="50" y="40" rx="5" ry="5" width="35" height="20" stroke-width="3"/>
       <circle id="blueTeam" cx="50" cy="50" r="20" stroke-width="3"/>
       
-      <rect class="barrel" x="215" y="40" rx="5" ry="5" width="35" height="20" stroke-width="3"/>
+      <rect class="barrelsAndRocks" x="215" y="40" rx="5" ry="5" width="35" height="20" stroke-width="3"/>
       <circle id="greenTeam" cx="250" cy="50" r="20" stroke-width="3"/>
       
-      <rect class="barrel" x="215" y="140" rx="5" ry="5" width="35" height="20" stroke-width="3"/>
+      <rect class="barrelsAndRocks" x="215" y="140" rx="5" ry="5" width="35" height="20" stroke-width="3"/>
       <circle id="magentaTeam" cx="250" cy="150" r="20" stroke-width="3"/>
       
-      <rect class="barrel" x="50" y="140" rx="5" ry="5" width="35" height="20" stroke-width="3"/>
+      <rect class="barrelsAndRocks" x="50" y="140" rx="5" ry="5" width="35" height="20" stroke-width="3"/>
       <circle id="redTeam" cx="50" cy="150" r="20" stroke-width="3"/>
       
       <polygon id="triangle" points="65.5,100  100,80  100,120"/>
@@ -30,159 +31,17 @@
       
       <polygon id="pentagon" points="138,113  130.6,90.2  150,76.1  169.4,90.2  162,113" />
       
-      <polygon id="rock" points="142.1,53.7  131.15,42.75  131.15,27.25  142.1,16.3  157.6,16.1  168.55,27.25  168.55,42.75  157.6,53.7"/>
+      <polygon id="rock" class="barrelsAndRocks" points="142.1,53.7  131.15,42.75  131.15,27.25  142.1,16.3  157.6,16.1  168.55,27.25  168.55,42.75  157.6,53.7"/>
       
       <polygon id="crasher" points="150,130 140,147.32 160,147.32"/>
       
-      <text x="125" y="180">road</text>
-    </svg>
+      <text x="125" y="180" id="gameText">road</text>
+    </svg> <br/>
+    
+    <button class="colorChangeBtn" id="changeBackgroundBtn">Change Background</button>
+        
+    <button class="colorChangeBtn" id="changeBorderBtn">Change Border</button>
     
     <div id="result"></div>
   </body>
-   
-   <style>
-      @import url('https://fonts.googleapis.com/css?family=Ubuntu:700,900');
-
-      @import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono');
-
-      body {
-        background-color: #f5f5f5;
-      }
-
-      #themeBtn {
-        width: 225px;
-        height: 50px;
-        border-radius: 5px;
-        background-color: #8abc3f;
-        font-size: 20px;
-        font-family: Ubuntu, Sans Serif;
-        color: Darkgreen;
-      }
-
-      #copyBtn {
-        width: 75px;
-        height: 50px;
-        border-radius: 5px;
-        background-color: #43a4c8;
-        font-size: 20px;
-        font-family: Ubuntu, Sans Serif;
-        color: darkblue;
-      }
-
-      #result {
-        background-color: lightgray;
-        font-family: Ubuntu Mono, Courier;
-        width: 270px;
-        margin-top: 10px;
-        padding: 15px;
-        border-radius: 5px;
-      }
-
-      img {
-        width: 300px;
-        margin-top: 10px;
-        border-radius: 5px;
-      }
-
-      #preview {
-        visibility: hidden;
-        width: 300px;
-        height: 200px;
-        border-radius: 5px;
-      }
-
-      svg text {
-        font-family: Ubuntu, sans-serif;
-        font-size: 25px;
-        stroke-width: 2;
-        letter-spacing: -1.5px;
-      }
-
-      svg polygon {
-        stroke-width: 3;
-      }
-   </style>
-   
-   <script>
-      new ClipboardJS("#copyBtn");
-
-      document.querySelector("#copyBtn").addEventListener("click", () => alert("Code has been copied. Enjoy!"));
-
-
-      function GenerateRandomColor() {
-        const chars = "0123456789ABCDEF";
-
-        let color = "#";
-
-        for (let i = 0; i < 6; ++i) {
-          let charIndex = Math.floor(Math.random() * 16);
-          color += chars[charIndex];
-        }
-
-        return color;
-      }
-
-
-      function GenerateTheme() {
-        const theme = {
-              content: {
-              teal: GenerateRandomColor(),
-              lgreen: GenerateRandomColor(),
-              orange: GenerateRandomColor(),
-              yellow: GenerateRandomColor(),
-              lavender: GenerateRandomColor(),
-              pink: GenerateRandomColor(),
-              vlgrey: GenerateRandomColor(),
-              lgrey: GenerateRandomColor(),
-              guiwhite: GenerateRandomColor(),
-              black: GenerateRandomColor(),
-              blue: GenerateRandomColor(),
-              green: GenerateRandomColor(),
-              red: GenerateRandomColor(),
-              gold: GenerateRandomColor(),
-              purple: GenerateRandomColor(),
-              magenta: GenerateRandomColor(),
-              grey: GenerateRandomColor(),
-              dgrey: GenerateRandomColor(),
-              white: GenerateRandomColor(),
-              guiblack: GenerateRandomColor(),
-              paletteSize: 10,
-              border: Math.random(),
-          }};
-
-          document.querySelector("#result").innerText = JSON.stringify(theme, 10, 10);
-
-          MakePreview(theme.content);
-      }
-
-
-      function MakePreview(theme) {
-        document.querySelector("#preview").style.backgroundColor = theme.white;
-        document.querySelector("#preview").style.visibility = "visible";
-
-        document.querySelector("#blueTeam").style.fill = theme.blue;
-        document.querySelector("#greenTeam").style.fill = theme.green;
-        document.querySelector("#redTeam").style.fill = theme.red;
-        document.querySelector("#magentaTeam").style.fill = theme.magenta;
-
-        document.querySelector("#triangle").style.fill = theme.orange;
-        document.querySelector("#square").style.fill = theme.gold;
-        document.querySelector("#pentagon").style.fill = theme.purple;
-        document.querySelector("#rock").style.fill = theme.grey;
-        document.querySelector("#crasher").style.fill = theme.pink;
-        document.querySelector("svg text").style.fill = theme.guiwhite;
-
-        const barrels = document.querySelectorAll(".barrel");
-        for (let i = 0; i < barrels.length; ++i) {
-          barrels[i].style.fill = theme.grey;
-        }
-
-        const borders = document.querySelectorAll("svg *");
-        for (let i = 0; i < borders.length; ++i) {
-          borders[i].style.stroke = theme.black;
-        }
-      }
-
-   </script>
-   
 </html>
